@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Accordion,
   AccordionItem,
@@ -7,8 +5,6 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion'
 import { Checkbox } from '@/components/ui/checkbox'
-import router from 'next/router'
-import { useEffect, useState } from 'react'
 
 interface ProductFiltersProps {
   filters: {
@@ -25,48 +21,6 @@ interface ProductFiltersProps {
 }
 
 const ProductFilters = ({ filters, searchParams }: ProductFiltersProps) => {
-  const [selectedFilters, setSelectedFilters] = useState<{
-    [key: string]: string[]
-  }>({})
-
-  // const router = useRouter()
-
-  useEffect(() => {
-    // Function to handle filter changes on the client-side
-    const handleFilterChange = (
-      attributeCode: string,
-      optionValue: string,
-      checked: boolean
-    ) => {
-      setSelectedFilters((prevSelectedFilters) => {
-        const currentSelectedOptions = prevSelectedFilters[attributeCode] || []
-        const updatedSelectedOptions = checked
-          ? [...currentSelectedOptions, optionValue]
-          : currentSelectedOptions.filter((option) => option !== optionValue)
-        return {
-          ...prevSelectedFilters,
-          [attributeCode]: updatedSelectedOptions,
-        }
-      })
-    }
-
-    // Function to update URL parameters based on selected filters
-    const updateURLParameters = () => {
-      const params = new URLSearchParams()
-      for (const key in selectedFilters) {
-        if (selectedFilters[key].length > 0) {
-          params.append(key, selectedFilters[key].join(','))
-        }
-      }
-      console.log('push roiter')
-      // router.push({ pathname: router.pathname, search: params.toString() })
-      // router.push(`/${relativeUrl}/?page=${Number(page) - 1}`)
-    }
-
-    // Call the updateURLParameters function whenever selectedFilters change
-    updateURLParameters()
-  }, [selectedFilters])
-
   return (
     <Accordion type="multiple" className="w-full">
       <p className="text-xl border-b-[1px] pb-2">Shop By Filters</p>
@@ -76,27 +30,13 @@ const ProductFilters = ({ filters, searchParams }: ProductFiltersProps) => {
             <AccordionTrigger>{filter.label}</AccordionTrigger>
             <AccordionContent>
               {filter.options.map((option) => {
-                const optionValue = option.value
-                const isChecked = (
-                  selectedFilters[filter.attribute_code] || []
-                ).includes(optionValue)
                 return (
-                  <div className="mb-4 ml-4" key={optionValue}>
+                  <div className="mb-4 ml-4">
                     <label
-                      htmlFor={optionValue}
+                      htmlFor={option.value}
                       className="flex items-center space-x-2 cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      <Checkbox
-                        id={optionValue}
-                        checked={isChecked}
-                        onChange={(e) =>
-                          handleFilterChange(
-                            filter.attribute_code,
-                            optionValue,
-                            e.target.checked
-                          )
-                        }
-                      />
+                      <Checkbox id={option.value} />
                       <span>{option.label}</span>
                     </label>
                   </div>
