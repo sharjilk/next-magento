@@ -15,11 +15,14 @@ const GET_CMS_HOMEPAGE_CONTENTFUL = gql`
           subtitle
           buttonText
           link
-          imageSrc {
-            url(transform: { format: WEBP })
+          image {
+            desktopImage {
+              url(transform: { format: WEBP })
+            }
+            mobileImage {
+              url(transform: { format: WEBP })
+            }
           }
-          imageWidth
-          imageHeight
         }
       }
       middleContentCollection {

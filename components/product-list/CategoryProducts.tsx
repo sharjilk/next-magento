@@ -84,7 +84,7 @@ const CategoryProducts = ({ products }: productsProps) => {
   return (
     <div>
       {/* Product list */}
-      <div className="mt-8 grid grid-cols-3 gap-4">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
         {categoryProducts?.map((product) => (
           <div className="group relative overflow-hidden" key={product.uid}>
             <Link href={product.url_key + product.url_suffix}>
@@ -94,17 +94,17 @@ const CategoryProducts = ({ products }: productsProps) => {
                 height={640}
                 alt={product.name}
               />
-              <div className="text-center mt-4 text-lg font-semibold">
+              <div className="text-center mt-4 md:text-lg font-semibold">
                 {product.name}
               </div>
             </Link>
             <Price
-              className="text-[16px] text-center"
+              className="md:text-[16px] text-center"
               price={product.price_range.minimum_price}
               productType={product.__typename}
             />
             <div className="flex justify-between items-center mt-4">
-              <AddToCart className="max-w-[60%] w-full mx-auto rounded uppercase" />
+              <AddToCart className="md:max-w-[60%] w-full mx-auto rounded uppercase" />
               <div
                 className="flex flex-col transition transform 
                 translate-x-8 ease-in-out p-3 invisible 

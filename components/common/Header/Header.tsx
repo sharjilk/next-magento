@@ -19,8 +19,8 @@ type HeaderProps = {
 
 const Header = ({ menu }: HeaderProps) => {
   return (
-    <>
-      <div className="border">
+    <header>
+      <div className="border hidden sm:block">
         <div className="container flex justify-between items-center">
           <StoreSwitcher />
           <div className="flex space-x-3">
@@ -34,10 +34,10 @@ const Header = ({ menu }: HeaderProps) => {
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="flex items-center justify-between pt-3 pb-3">
-          <div>
-            <Link href="/" className="flex items-center">
+      <div className="container pt-4 sm:relative">
+        <div className="flex justify-between items-center mb-4">
+          <div className="ml-12 sm:ml-0">
+            <Link href="/" className="">
               <Image
                 src="/clothing.png"
                 width={60}
@@ -47,27 +47,26 @@ const Header = ({ menu }: HeaderProps) => {
               />
             </Link>
           </div>
-          <div className="flex space-x-6">
-            <HeaderSearch />
-
+          <div className="flex space-x-4 pr-[12px]">
             {/* <HeaderUserMenu /> */}
-            <Link className="flex items-center" href="/customer/account/login">
-              <UserCircle2 className="h-6 w-6" />
+            <Link className="" href="/customer/account/login">
+              <UserCircle2 strokeWidth="1" className="h-8 w-8" />
             </Link>
             {/* <Link className="flex items-center" href="/wishlist">
               <Heart className="h-6 w-6" />
             </Link> */}
-            <Link className="flex items-center relative" href="/cart">
-              <ShoppingBag className="h-6 w-6" />
+            <Link className="relative" href="/cart">
+              <ShoppingBag strokeWidth="1" className="h-8 w-8" />
               <span className="bg-black text-white text-sm h-5 w-5 rounded-3xl text-center absolute right-[-12px] top-[-3px] ">
                 0
               </span>
             </Link>
           </div>
         </div>
+        <HeaderSearch />
       </div>
       <HeaderMenu menu={menu} />
-    </>
+    </header>
   )
 }
 

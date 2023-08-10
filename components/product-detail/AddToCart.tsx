@@ -47,8 +47,11 @@ const AddToCart = () => {
             <Plus className="h-4 w-4" />
           </Button>
         </div>
-        <Button size="lg" className="text-lg font-normal w-2/4">
-          <ShoppingCart className="mr-2 h-6 w-6" /> Add to Cart
+        <Button
+          size="lg"
+          className="text-sm md:text-lg px-4 md-px-6 font-normal w-2/4 uppercase"
+        >
+          <ShoppingCart className="mr-2 h-4 w-4 md:w-6 md:h-6" /> Add to Cart
         </Button>
       </div>
     </>

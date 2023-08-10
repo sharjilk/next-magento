@@ -27,12 +27,8 @@ const StoreSwitcher = () => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="main_default">
-            Main website - Default Store
-          </SelectItem>
-          <SelectItem value="other_second">
-            Other website - second store
-          </SelectItem>
+          <SelectItem value="main_default">UAE</SelectItem>
+          <SelectItem value="other_second">KSA</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

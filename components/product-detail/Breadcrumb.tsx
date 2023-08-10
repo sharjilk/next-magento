@@ -39,7 +39,9 @@ const Breadcrumb = ({ breadcrumb }: breadcrumbProps) => {
       </Button>
       {breadcrumbItem?.map((item, index) => (
         <span className="flex" key={index}>
-          {item?.category_uid && <ChevronRight className="mx-4 h-6 w-6" />}
+          {item?.category_uid && (
+            <ChevronRight className="mx-2 sm:mx-4 h-6 w-6" />
+          )}
           <Button variant="link" className="p-0 h-auto">
             <Link href={`/${item?.category_url_path}.html`}>
               {item?.category_name}

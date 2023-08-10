@@ -1,4 +1,5 @@
 'use client'
+
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -6,6 +7,7 @@ import 'swiper/css/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { buttonVariants } from '@/components/ui/button'
+import Image from 'next/image'
 
 type bannerSliderprops = {
   __typename: string
@@ -16,11 +18,14 @@ type bannerSliderprops = {
   subtitle: string
   buttonText: string
   link: string
-  imageSrc: {
-    url: string
+  image: {
+    desktopImage: {
+      url: string
+    }
+    mobileImage: {
+      url: string
+    }
   }
-  imageWidth: string
-  imageHeight: string
 }[]
 
 const BannerSlider = ({ slides }: { slides: bannerSliderprops }) => {
@@ -30,19 +35,29 @@ const BannerSlider = ({ slides }: { slides: bannerSliderprops }) => {
       loop={true}
       modules={[Navigation]}
       slidesPerView={1}
+      className="mt-4 md:mt-0"
     >
       {slides.map((slide) => {
         return (
           <SwiperSlide key={slide.sys.id}>
             <div className="relative">
-              <img
-                src={slide.imageSrc.url}
+              <Image
+                src={slide.image.desktopImage.url}
                 alt={slide.title}
-                className="w-full h-full"
-                width={slide.imageWidth}
-                height={slide.imageHeight}
+                className="w-full h-full hidden md:block"
+                width={1440}
+                height={660}
+                priority={true}
               />
-              <div className="absolute top-0 left-40 p-4 w-2/5 h-full justify-center flex flex-col">
+              <Image
+                src={slide.image.mobileImage.url}
+                alt={slide.title}
+                className="w-full h-full md:hidden"
+                width={720}
+                height={660}
+                priority={true}
+              />
+              <div className="hidden md:flex absolute top-0 left-40 p-4 w-2/5 h-full justify-center flex-col">
                 <h2 className="text-4xl font-bold">{slide.title}</h2>
                 <p className="mt-6">{slide.subtitle}</p>
 

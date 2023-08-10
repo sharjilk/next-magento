@@ -108,8 +108,8 @@ const Category = async ({
         </aside>
         <div className="w-full sm:w-2/3 md:w-4/5">
           {/* Product nav bar */}
-          <div className="flex justify-between">
-            <div className="flex items-center">
+          <div className="flex justify-between flex-col md:flex-row mt-6 md:mt-0">
+            <div className="items-center justify-between hidden md:flex">
               <Button variant="secondary" className="p-0 w-10 h-10">
                 <LayoutGrid className="h-6 w-6" />
               </Button>

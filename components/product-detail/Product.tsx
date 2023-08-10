@@ -56,7 +56,7 @@ const Product = async ({ pageType, urlKey }: PageProps) => {
         </div>
 
         {/* Product Detail */}
-        <div className="w-full sm:w-2/3 md:w-2/5">
+        <div className="w-full sm:w-2/3 md:w-2/5 mt-6 sm:mt-0">
           <div className="flex justify-between mb-6 pb-6 border-b-[1px] border-black">
             <div>
               <h1 className="text-2xl mb-4">{name}</h1>

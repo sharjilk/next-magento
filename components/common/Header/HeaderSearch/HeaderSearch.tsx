@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Search } from 'lucide-react'
 
 const HeaderSearch = () => {
   return (
     <form
-      className="flex relative w-[300px]"
+      className="flex relative sm:absolute sm:top-[26px] sm:right-[130px] sm:w-[300px] sm:max-w-full"
       onSubmit={(e) => {
-        e.preventDefault;
+        e.preventDefault
       }}
     >
       <Input type="text" placeholder="Search..." className="border-black" />
@@ -21,7 +21,7 @@ const HeaderSearch = () => {
         <Search className="h-4 w-4" />
       </Button>
     </form>
-  );
-};
+  )
+}
 
-export default HeaderSearch;
+export default HeaderSearch

@@ -27,12 +27,12 @@ const ProductWidget = async ({ productSku }: productWidgetProps) => {
       <h2 className="text-[26px] font-semibold text-center">
         {productSku.title}
       </h2>
-      <div className="mt-8 grid grid-cols-4 gap-4">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
         {productForWidget &&
           productForWidget?.items?.map((item: any) => {
             return (
               <div
-                className="group relative overflow-hidden border py-6"
+                className="group relative overflow-hidden md:border py-6"
                 key={item.uid}
               >
                 <Link href={item.url_key + item.url_suffix}>
@@ -42,17 +42,17 @@ const ProductWidget = async ({ productSku }: productWidgetProps) => {
                     height={640}
                     alt={item.name}
                   />
-                  <div className="text-center mt-4 text-lg font-semibold">
+                  <div className="text-center mt-4 md:text-lg font-semibold">
                     {item.name}
                   </div>
                 </Link>
                 <Price
-                  className="text-[16px] text-center"
+                  className="md:text-[16px] text-center"
                   price={item.price_range.maximum_price}
                   productType={item.__typename}
                 />
                 <div className="flex justify-between items-center mt-4">
-                  <AddToCart className="max-w-[60%] w-full mx-auto rounded uppercase" />
+                  <AddToCart className="md:max-w-[60%] w-full mx-auto rounded uppercase" />
                   <div
                     className="flex flex-col transition transform 
       translate-x-8 ease-in-out p-3 invisible 

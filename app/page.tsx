@@ -67,11 +67,11 @@ const Home = async () => {
           />
 
           {/* 3 column banner */}
-          <div className="flex flex-row justify-between space-x-8 mt-8">
+          <div className="flex flex-col md:flex-row md:justify-between md:space-x-8 mt-4 md:mt-8">
             {mediumBanner3colContent &&
               mediumBanner3colContent?.map((item: any) => {
                 return (
-                  <div className="flex flex-col w-1/3 relative">
+                  <div className="flex flex-col w-full md:w-1/3 relative mb-4">
                     <img
                       src={item?.image?.url}
                       alt={item?.title}
@@ -88,8 +88,8 @@ const Home = async () => {
 
           {/* Wide Banner */}
           {wideBanner && (
-            <div className="flex items-center justify-center w-full my-20">
-              <div className="w-2/4">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-center md:w-full my-20">
+              <div className="md:w-2/4 order-2 md:order-1">
                 <h2 className="text-[26px] font-semibold mb-4 uppercase">
                   {wideBanner?.title}
                 </h2>
@@ -103,6 +103,7 @@ const Home = async () => {
                 </Link>
               </div>
               <Image
+                className="order-1 md:order-2"
                 src={wideBanner?.image?.url}
                 alt={wideBanner?.title}
                 width={550}
