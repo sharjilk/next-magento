@@ -35,27 +35,48 @@ const Category = async ({
 }: PageProps) => {
   const apolloClient = getApolloClient()
 
+  const pageSize = '24'
   const page = searchParams['page'] ?? '1'
-  const pageSize = '6'
-
   // const ProductAttributeSortInput = {}
   const ProductAttributeSortInput = { position: 'ASC' }
+
+  const filterParam = searchParams
+  if ('page' in filterParam) {
+    delete filterParam.page
+  }
+
+  const filtersObj = {} as any
+
+  for (const prop in filterParam) {
+    if (
+      prop !== 'price' &&
+      Object.prototype.hasOwnProperty.call(filterParam, prop)
+    ) {
+      filtersObj[prop] = {
+        in: filterParam[prop],
+      }
+    }
+  }
+
+  for (const prop in filterParam) {
+    if (
+      prop === 'price' &&
+      Object.prototype.hasOwnProperty.call(filterParam, prop)
+    ) {
+      const [from, to] = filterParam[prop]?.split('_')
+      filtersObj[prop] = {
+        from,
+        to,
+      }
+    }
+  }
 
   const filters = {
     category_uid: {
       in: [categoryId],
     },
-    // price: {
-    //   from: '70',
-    //   to: '90',
-    // },
+    ...filtersObj,
   }
-  // const filters = {
-  //   sku: {
-  //     in: ['VD09', 'VD08', 'VD03', 'VD05', 'VD10', 'VD01', 'VD12', 'VD07'],
-  //   },
-  //   price: { from: '70', to: '90' },
-  // }
 
   const promiseCategoryList = getProductList(
     apolloClient,
@@ -99,7 +120,7 @@ const Category = async ({
 
       <div className="flex flex-row flex-wrap">
         <aside className="w-full sm:w-1/3 md:w-1/5 pr-4">
-          <div className="sticky top-0 w-full">
+          <div className="top-0 w-full">
             <ProductFilters
               filters={data.products.aggregations}
               searchParams={searchParams}
