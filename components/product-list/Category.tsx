@@ -1,8 +1,5 @@
 import { getApolloClient } from '@/framework/apollo/apollo-client'
-import {
-  getProductList,
-  getProductFiltersByCategory,
-} from '@/framework/apollo/operations'
+import { getProductList } from '@/framework/apollo/operations'
 import Link from 'next/link'
 import { ChevronRight, LayoutList, LayoutGrid } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -37,7 +34,6 @@ const Category = async ({
 
   const pageSize = '24'
   const page = searchParams['page'] ?? '1'
-  // const ProductAttributeSortInput = {}
   const ProductAttributeSortInput = { position: 'ASC' }
 
   const filterParam = searchParams
@@ -45,31 +41,42 @@ const Category = async ({
     delete filterParam.page
   }
 
-  const filtersObj = {} as any
+  function processFilters(filterParam: any) {
+    const filtersObj: { [key: string]: any } = {}
 
-  for (const prop in filterParam) {
-    if (
-      prop !== 'price' &&
-      Object.prototype.hasOwnProperty.call(filterParam, prop)
-    ) {
-      filtersObj[prop] = {
-        in: filterParam[prop],
+    for (const prop in filterParam) {
+      if (Object.prototype.hasOwnProperty.call(filterParam, prop)) {
+        if (prop === 'price') {
+          let from: string | undefined
+          let to: string | undefined
+
+          if (Array.isArray(filterParam[prop])) {
+            const [fromArray, toArray] = filterParam[prop] as string[]
+            from = fromArray
+            to = toArray
+          } else {
+            const [fromString, toString] =
+              (filterParam[prop] as string)?.split('_') || []
+            from = fromString
+            to = toString
+          }
+
+          filtersObj[prop] = {
+            from,
+            to,
+          }
+        } else {
+          filtersObj[prop] = {
+            in: filterParam[prop],
+          }
+        }
       }
     }
+
+    return filtersObj
   }
 
-  for (const prop in filterParam) {
-    if (
-      prop === 'price' &&
-      Object.prototype.hasOwnProperty.call(filterParam, prop)
-    ) {
-      const [from, to] = filterParam[prop]?.split('_')
-      filtersObj[prop] = {
-        from,
-        to,
-      }
-    }
-  }
+  const filtersObj = processFilters(filterParam)
 
   const filters = {
     category_uid: {
