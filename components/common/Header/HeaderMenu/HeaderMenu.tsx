@@ -31,7 +31,7 @@ const HeaderMenu = ({ menu }: HeaderProps) => {
   return (
     <>
       {/* Desktop menu */}
-      <div className="bg-black text-white hidden sm:block">
+      <div className="bg-black text-white hidden sm:flex">
         <div className="container">
           <ul className="flex w-full space-x-6">
             {menuCategories &&

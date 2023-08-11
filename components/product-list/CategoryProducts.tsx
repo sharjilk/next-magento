@@ -93,6 +93,7 @@ const CategoryProducts = ({ products }: productsProps) => {
                 width={640}
                 height={640}
                 alt={product.name}
+                sizes="(min-width: 1520px) 365px, (min-width: 780px) 24.44vw, (min-width: 640px) calc(33.33vw - 18px), calc(50vw - 24px)"
               />
               <div className="text-center mt-4 md:text-lg font-semibold">
                 {product.name}
