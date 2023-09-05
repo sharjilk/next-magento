@@ -44,19 +44,20 @@ const BannerSlider = ({ slides }: { slides: bannerSliderprops }) => {
               <Image
                 src={slide.image.desktopImage.url}
                 alt={slide.title}
-                className="w-full h-full hidden md:block"
+                className="md:w-full md:h-full object-cover object-right h-[400px]"
                 width={1440}
                 height={660}
                 priority={true}
+                sizes="(min-width: 1520px) 1408px, (min-width: 460px) 94.23vw, (min-width: 420px) 388px, (min-width: 380px) 348px, (min-width: 340px) 308px, 268px"
               />
-              <Image
+              {/* <Image
                 src={slide.image.mobileImage.url}
                 alt={slide.title}
                 className="w-full h-full md:hidden"
                 width={720}
                 height={660}
                 priority={true}
-              />
+              /> */}
               <div className="hidden md:flex absolute top-0 left-40 p-4 w-2/5 h-full justify-center flex-col">
                 <h2 className="text-4xl font-bold">{slide.title}</h2>
                 <p className="mt-6">{slide.subtitle}</p>
